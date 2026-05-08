@@ -28,4 +28,5 @@ The following issues have been solved in 7.2.1:
 * Fix standalone installation of Ruby gem openebula-cli [#7608](https://github.com/OpenNebula/one/issues/7608)
 * Fix Ceph monitoring to reflect actual disk usage in RBD [#7185](https://github.com/OpenNebula/one/issues/7185).
 * Fix auto focus VNC window when typing [#7553](https://github.com/OpenNebula/one/issues/7553).
+* Fix translations in other languages [#7365](https://github.com/OpenNebula/one/issues/7365).
 * Fix empty `PROBES_PERIOD` values causing monitor probes to run without delay [#7659](https://github.com/OpenNebula/one/issues/7659).
