@@ -25,6 +25,8 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## KVM
 
+* Enable filtering by OS ID/type/version/architecture in [QEMU Guest Agent Monitoring](/product/operation_references/hypervisor_configuration/kvm_driver/#qemu-guest-agent-monitoring).
+
 ## LXC
 
 ## OpenNebula Form
