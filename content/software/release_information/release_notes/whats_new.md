@@ -23,6 +23,8 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 
 ## API and CLI
 
+* **Dynamic VM Group Management**: New CLI commands `onevm vmgroup-add` and `onevm vmgroup-del` allow adding or removing VMs from a [VM Group]({{% relref "affinity.md#dynamic-vmg" %}}) dynamically.
+
 ## KVM
 
 * Enable filtering by OS ID/type/version/architecture in [QEMU Guest Agent Monitoring](/product/operation_references/hypervisor_configuration/kvm_driver/#qemu-guest-agent-monitoring).
