@@ -38,3 +38,4 @@ The following issues have been solved in 7.2.1:
 * Fix pure LVM live migration when VM has no CONTEXT [#7674](https://github.com/OpenNebula/one/issues/7674).
 * Fix Restic exclusive lock detection [#7403](https://github.com/OpenNebula/one/issues/7403) + [#7404](https://github.com/OpenNebula/one/issues/7404).
 * Fix CEPH RBD incremental backup deadlocks [#7529](https://github.com/OpenNebula/one/issues/7529)
+* Fix `USER_INPUT` variable expansion not applied in `SCHED_REQUIREMENTS` when instantiating via FireEdge [#7491](https://github.com/OpenNebula/one/issues/7491)
