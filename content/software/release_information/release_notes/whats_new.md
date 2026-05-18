@@ -24,6 +24,8 @@ OpenNebula 7.2 is a high-performance engine designed to handle the most demandin
 
 * The debut of the new OneForm service for automating unified, on-demand deployment and configuration of distributed OpenNebula Clusters across resources from both on-premises hardware and cloud providers.
 
+* Elastic Kubernetes as a Service with OneKS, providing a structured, streamlined way to create, operate, and deprovision Kubernetes Clusters on OpenNebula clouds.
+
 * Broadened OS support with official support for the latest enterprise distributions, including AlmaLinux 10, RHEL 10, and Debian 13.
 
 * And much more! Continue reading to find out more details...
@@ -72,6 +74,9 @@ Thank you to our incredible community and partners for your continued support in
 
 ## OpenNebula Form
 - [OneForm Automated Cluster Provisioning]({{% relref "product/cluster_provisioning/overview/" %}}) is a new service designed to automate the creation of OpenNebula Clusters across on-premises environments and cloud providers, simplifying hybrid cloud strategies through unified, on-demand deployment.
+
+## Elastic Kubernetes as a Service
+- [OneKS]({{% relref "platform_services/oneks/getting_started/overview/" %}}) is a new OpenNebula service that streamlines and simplifies the provisioning and operation of Kubernetes Clusters on OpenNebula cloud deployments. OneKS builds on CAPONE to expose a Cluster-centric lifecycle model for users needing a simple and repeatable way to consume Kubernetes inside OpenNebula.
 
 ## Packaging
 - Expanded Operating System Support with official compatibility for SUSE Linux distributions.
