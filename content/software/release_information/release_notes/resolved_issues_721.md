@@ -17,7 +17,7 @@ The following new features have been backported to 7.2.1:
 * Improved Open vSwitch VLAN trunking support in the `ovswitch` driver by adding native OVS `trunk` mode when only `VLAN_TAGGED_ID` is defined. Existing configurations using `VLAN_ID` continue to behave as before. Note that untagged traffic is now dropped for pure trunk configurations. See [Multiple VLANs (VLAN trunking)](/product/cluster_configuration/networking_system/openvswitch/#multiple-vlans-vlan-trunking) for details.
 * [PCI device monitoring now includes `IFNAME`, `SRIOV` and `SRIOV_NUM` attributes]({{% relref "product/cluster_configuration/hosts_and_clusters/hosts#host-pci-devices" %}}) to map PCI devices to network interface names and identify SR-IOV Physical/Virtual Functions.
 * Moved Open vSwitch DPDK socket directory to `/var/run/one/vhost-socks` [#7673](https://github.com/OpenNebula/one/issues/7673)
-* Added [OneKS Elastic Kubernetes as a Service (EE)]({{% relref "platform_services/oneks/getting_started/overview/" %}}).
+* Added [Elastic Kubernetes as a Service with OneKS (EE)]({{% relref "platform_services/oneks/getting_started/overview/" %}}).
 
 ## Resolved Issues
 
