@@ -31,11 +31,18 @@ After installing the database, follow one of the following guides to configure t
 
 Not all OpenNebula dependencies are in base distribution repositories. On selected platforms below you need to enable third party repositories by running the following commands under privileged user (`root`):
 
+{{< tabpane text=true right=false >}}
+{{% tab header="**OS**:" disabled=true /%}}
+
+{{% tab header="**AlmaLinux 9, 10**"%}}
 **AlmaLinux 9, 10**
 
 ```shell
 yum -y install epel-release
 ```
+
+{{% /tab %}}
+{{% tab header="**RHEL 9**"%}}
 
 **RHEL 9**
 
@@ -43,7 +50,8 @@ yum -y install epel-release
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
 
-<a id="packages"></a>
+{{% /tab %}}
+{{< /tabpane >}}
 
 ## Step 3. Installing the Software
 
@@ -61,6 +69,10 @@ Available packages for OpenNebula clients, the Front-end and hypervisor nodes:
 | **opennebula-node-lxc**                                                                                  | Base setup for LXC hypervisor Node (*not on RHEL 7*)                                                                                                 |
 | **opennebula-prometheus**                                                                                | OpenNebula Prometheus and Grafana integration                                                                                                        |
 | **opennebula-prometheus-kvm**                                                                            | OpenNebula KVM exporters                                                                                                                             |
+| **opennebula-prometheus-ovs**                                                                            | (optional) Prometheus exporter for Open vSwitch metrics                                                                                              |
+| **opennebula-prometheus-mysql**                                                                          | (optional) Prometheus exporter for MySQL/MariaDB server metrics                                                                                      |
+| **opennebula-prometheus-smartctl**                                                                       | (optional) Prometheus exporter for S.M.A.R.T. disk metrics                                                                                           |
+| **opennebula-prometheus-lvm**                                                                            | (optional) Prometheus exporter for LVM metrics                                                                                                       |
 | **opennebula-swap**                                                                                      | OneSwap migration tool from vCenter to OpenNebula KVM                                                                                                |
 | **opennebula-guacd**                                                                                     | Proxy daemon for Guacamole                                                                                                                           |
 | **opennebula-rubygems**                                                                                  | Bundled Ruby gem dependencies                                                                                                                        |
@@ -77,13 +89,20 @@ There are a few differences in package names among distributions. Those with var
 
 Install all OpenNebula Front-end components by executing the following commands under a privileged user:
 
-### AlmaLinux / RHEL
+{{< tabpane text=true right=false >}}
+{{% tab header="**OS**:" disabled=true /%}}
+
+{{% tab header="**AlmaLinux 9, 10**"%}}
+**AlmaLinux / RHEL**
 
 ```shell
 yum -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
 
-### Debian / Ubuntu
+{{% /tab %}}
+{{% tab header="**RHEL 9**"%}}
+
+**Debian / Ubuntu**
 
 ```shell
 apt-get update
@@ -91,12 +110,17 @@ apt-get update
 ```shell
 apt-get -y install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
+{{% /tab %}}
+{{% tab header="**SLES / openSUSE**"%}}
 
-### SLES / openSUSE
+**SLES / openSUSE**
 
 ```shell
 zypper install opennebula opennebula-fireedge opennebula-gate opennebula-flow
 ```
+
+{{% /tab %}}
+{{< /tabpane >}}
 
 ## Step 4. Enabling MySQL/MariaDB (Optional)
 

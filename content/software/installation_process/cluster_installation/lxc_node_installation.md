@@ -43,34 +43,46 @@ Refer to [OpenNebula Repositories]({{% relref "opennebula_repository_configurati
 
 OpenNebula depends on packages which aren’t in the base distribution repositories. Execute one of the commands below (distinguished by the Host platform) to configure access to additional [EPEL](https://fedoraproject.org/wiki/EPEL) (Extra Packages for Enterprise Linux) repository:
 
-**AlmaLinux 9, 10**
+{{< tabpane text=true right=false >}}
+{{% tab header="**OS**:" disabled=true /%}}
 
+{{% tab header="**AlmaLinux 9, 10**"%}}
+### AlmaLinux 9, 10
 ```shell
 yum -y install epel-release
 ```
+{{% /tab %}}
 
-**RHEL 9**
-
+{{% tab header="RHEL 9"%}}
+### RHEL 9
 ```shell
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 ```
+{{% /tab %}}
+{{< /tabpane >}}
 
 ### Install OpenNebula LXC Node Package
 
 Execute the following commands to install the OpenNebula LXC Node package:
 
+{{< tabpane text=true right=false >}}
+{{% tab header="**OS**:" disabled=true /%}}
+{{% tab header="AlmaLinux/RHEL"%}}
 #### Installing on AlmaLinux/RHEL
 
 ```shell
 yum -y install opennebula-node-lxc
 ```
-
+{{% /tab %}}
+{{% tab header="Debian/Ubuntu"%}}
 #### Installing on Debian/Ubuntu
 
 ```shell
 apt-get update
 apt-get -y install opennebula-node-lxc
 ```
+{{% /tab %}}
+{{< /tabpane >}}
 
 Install the suggested package `rbd-nbd` if the Ceph Datastore is going to be used by the LXC Hosts. For further configuration check the specific [guide]({{% relref "lxc_driver#lxcmg" %}}).
 
@@ -92,7 +104,8 @@ Depending on your OpenNebula deployment type, the following may be required on y
 
 ```shell
 setsebool -P virt_use_nfs on
-```{{< /alert >}}  
+```
+{{< /alert >}}
 
 ## Step 4. Configure Passwordless SSH
 
@@ -104,7 +117,7 @@ The OpenNebula Front-end connects to the hypervisor nodes using SSH. Following c
 - From Front-end to hypervisor node with another connection within back to Front-end (for data copy back)
 
 {{< alert title="Important" type="info" >}}
-It must be ensured that Front-end and all nodes **can connect to each other** over SSH without manual intervention.{{< /alert >}} 
+It must be ensured that Front-end and all nodes **can connect to each other** over SSH without manual intervention.{{< /alert >}}
 
 When OpenNebula server package is installed on the Front-end, an SSH key pair is automatically generated for the `oneadmin` user into `/var/lib/one/.ssh/id_rsa` and `/var/lib/one/.ssh/id_rsa.pub`, the public key is also added into `/var/lib/one/.ssh/authorized_keys`. It happens only if these files don’t exist yet; existing files (e.g., leftovers from previous installations) are not touched! For new installations the [default SSH configuration]({{% relref "advanced_ssh_usage#node-ssh-config" %}}) is placed for the `oneadmin` from `/usr/share/one/ssh` into `/var/lib/one/.ssh/config`.
 
@@ -119,10 +132,10 @@ To learn more about the SSH, read the [Advanced SSH Usage]({{% relref "advanced_
 You should prepare and further manage the list of host SSH public keys of your nodes (a.k.a. `known_hosts`) so that all communicating parties know the identity of the other sides. The file is located in `/var/lib/one/.ssh/known_hosts` and we can use the command `ssh-keyscan` to manually create it. It should be executed on your Front-end under the `oneadmin` user and copied on all your nodes.
 
 {{< alert title="Important" type="info" >}}
-You’ll need to update and redistribute file with Host keys every time any Host is reinstalled or its keys are regenerated.{{< /alert >}} 
+You’ll need to update and redistribute file with Host keys every time any Host is reinstalled or its keys are regenerated.{{< /alert >}}
 
 {{< alert title="Important" type="info" >}}
-If [default SSH configuration]({{% relref "advanced_ssh_usage#node-ssh-config" %}}) shipped with OpenNebula is used, the SSH client automatically accepts Host keys on the first connection. That makes this step optional, as the `known_hosts` will be incrementally automatically generated on your infrastructure when the various connections happen. While this simplifies the initial deployment, it lowers the security of your infrastructure. We highly recommend to populate `known_hosts` on your infrastructure in a controlled manner!{{< /alert >}} 
+If [default SSH configuration]({{% relref "advanced_ssh_usage#node-ssh-config" %}}) shipped with OpenNebula is used, the SSH client automatically accepts Host keys on the first connection. That makes this step optional, as the `known_hosts` will be incrementally automatically generated on your infrastructure when the various connections happen. While this simplifies the initial deployment, it lowers the security of your infrastructure. We highly recommend to populate `known_hosts` on your infrastructure in a controlled manner!{{< /alert >}}
 
 Make sure you are logged in on your Front-end and run the commands as `oneadmin`, e.g., by typing:
 
@@ -173,16 +186,16 @@ If you need to distribute `oneadmin`’s private SSH key on your nodes, proceed 
 scp -p /var/lib/one/.ssh/id_rsa <node1>:/var/lib/one/.ssh/
 scp -p /var/lib/one/.ssh/id_rsa <node2>:/var/lib/one/.ssh/
 scp -p /var/lib/one/.ssh/id_rsa <node3>:/var/lib/one/.ssh/
-```{{< /alert >}}  
+```{{< /alert >}}
 
 ### C. Validate Connections
 
 You should verify that none of these connections (under user `oneadmin`) fail and none require a password:
 
-* from the Front-end to Front-end itself
-* from the Front-end to all nodes
-* from all nodes to all nodes
-* from all nodes back to Front-end
+* From the Front-end to Front-end itself
+* From the Front-end to all nodes
+* From all nodes to all nodes
+* From all nodes back to Front-end
 
 For example, execute on the Front-end:
 
@@ -246,7 +259,7 @@ ip link show master br1
 ```
 
 {{< alert title="Note" type="info" >}}
-Remember that this is only required in the Hosts, not in the Front-end. Also remember that the exact name of the resources is not important (`br0`, `br1`, etc…), however it’s important that the bridges and NICs have the same name in all the Hosts.{{< /alert >}} 
+Remember that this is only required in the Hosts, not in the Front-end. Also remember that the exact name of the resources is not important (`br0`, `br1`, etc…), however it’s important that the bridges and NICs have the same name in all the Hosts.{{< /alert >}}
 
 ## Step 6.  Storage Configuration
 
@@ -261,21 +274,28 @@ In this step, we’ll register the hypervisor node we have configured above into
 Learn more in [Hosts and Clusters Management]({{% relref "../../../product/cluster_configuration/hosts_and_clusters/overview#hostsubsystem" %}}).
 
 {{< alert title="Note" type="info" >}}
-If the host turns to `err` state instead of `on`, check OpenNebula log `/var/log/one/oned.log`. The problem might be with connecting over SSH.{{< /alert >}} 
+If the host turns to `err` state instead of `on`, check OpenNebula log `/var/log/one/oned.log`. The problem might be with connecting over SSH.{{< /alert >}}
 
+{{< tabpane text=true right=false >}}
+{{% tab header="**Interface**:" disabled=true /%}}
+
+{{% tab header="Sunstone"%}}
 ### Add Host with Sunstone
 
 Open Sunstone as documented [here]({{% relref "frontend_install#verify-frontend-section-sunstone" %}}). On the left side menu go to **Infrastructure** → **Hosts**. Click on the `+` button.
 
-![sunstone_select_create_host](/images/sunstone_select_create_host.png)
+{{< image path="/images/sunstone_select_create_host.png" alt="Sunstone select create host" align="center" width="90%" mb="20px" >}}
 
 Then fill in the hostname, FQDN, or IP of the node in the `Hostname` field.
 
-![sunstone_create_host_dialog](/images/sunstone_create_host_dialog_lxc.png)
+{{< image path="/images/sunstone_create_host_dialog_lxc.png" alt="Sunstone select create host dialog" align="center" width="90%" mb="20px" >}}
 
 Finally, return back to the **Hosts** list, and check that the Host has switched to `ON` status. It can take up to one minute. You can click on the refresh button to check the status more frequently.
 
-![sunstone_list_hosts](/images/sunstone_list_hosts.png)
+{{< image path="/images/sunstone_list_hosts.png" alt="Sunstone select list hosts" align="center" width="90%" mb="20px" >}}
+
+{{% /tab %}}
+{{% tab header="CLI"%}}
 
 ### Add Host with CLI
 
@@ -294,10 +314,12 @@ onehost list
 ID NAME            CLUSTER   RVM      ALLOCATED_CPU      ALLOCATED_MEM STAT
  0 node01          default     0       0 / 400 (0%)     0K / 7.7G (0%) on
 ```
+{{% /tab %}}
+{{< /tabpane >}}
 
 ## Next steps
 
 Now, you can continue by controlling and extending your cloud:
 
-- Configuring [Storage]({{% relref "../../../product/cluster_configuration/storage_system/overview" %}}) and [Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview" %}})
-- Exploring the [Product]({{% relref "product/index" %}}) guides, such as [Control Plane Configuration]({{% relref "product/control_plane_configuration/index" %}}), [Cloud Cluster Configuration]({{% relref "product/cluster_configuration/index" %}}) and [Virtual Machines Operation]({{% relref "product/virtual_machines_operation/index" %}})
+- Configuring [Storage]({{% relref "../../../product/cluster_configuration/storage_system/overview" %}}) and [Networking]({{% relref "../../../product/cluster_configuration/networking_system/overview" %}}).
+- Exploring the [Product]({{% relref "product/index" %}}) guides, such as [Control Plane Configuration]({{% relref "product/control_plane_configuration/index" %}}), [Cloud Cluster Configuration]({{% relref "product/cluster_configuration/index" %}}) and [Virtual Machines Operation]({{% relref "product/virtual_machines_operation/index" %}}).
