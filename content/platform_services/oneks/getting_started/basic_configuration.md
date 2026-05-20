@@ -33,9 +33,9 @@ sudo systemctl status opennebula-gate.service
 
 Validate the OneGate configuration using the OpenNebula OneGate [documentation]({{% relref "product/operation_references/opennebula_services_configuration/onegate/" %}}).
 
-## Transparent Proxy Configuration 
+## Transparent Proxy Configuration
 
-Verify that the [transparent proxy]({{% relref "product/virtual_machines_operation/virtual_machines_networking/tproxy/" %}}) is configured to expose OneGate and the OpenNebula XML-RPC API through the Front-end public network.
+Verify that the [transparent proxy]({{% relref "product/virtual_machines_operation/virtual_machines_networking/tproxy/" %}}) is configured to expose OneGate and the OpenNebula API through the a netowrk interconnecting the Front-end and Hosts.
 
 The configuration is typically defined in the following location on the OpenNebula Front-end:
 
@@ -53,15 +53,15 @@ Example configuration:
 
 ```yaml
 :tproxy:
-  - :remote_addr: 192.168.150.1 # Front-end public network IP
+  - :remote_addr: 192.168.150.1 # Front-end IP
     :remote_port: 5030
     :service_port: 5030
-  - :remote_addr: 192.168.150.1 # Front-end public network IP
+  - :remote_addr: 192.168.150.1 # Front-end IP
     :remote_port: 2633
     :service_port: 2633
 ```
 
-Replace `192.168.150.1` with the Front-end IP address of the public Virtual Network and save the file. On Front-end command line, as the oneadmin system user, sync the OpenNebulaNetwork.conf file with the hypervisor Hosts, by running `onehost sync -f`.
+Replace `192.168.150.1` with the Front-end IP address used to connect to the Hosts and save the file. On Front-end command line, as the oneadmin system user, sync the OpenNebulaNetwork.conf file with the hypervisor Hosts, by running `onehost sync -f`.
 
 ## Public and Private Virtual Networks
 
@@ -73,7 +73,7 @@ onevnet list
 
 You need:
 
-* A **public Virtual Network**, used as the gateway to the Internet and for external K8s Cluster connectivity.  
+* A **public Virtual Network**, used as the gateway to the Internet and for external K8s Cluster connectivity.
 * A **private Virtual Network**, used for internal communication between K8s Cluster nodes.
 
 ## User Permissions
@@ -147,7 +147,7 @@ mkdir -p ~/.local/bin
 mv ./kubectl ~/.local/bin/kubectl
 # and then append (or prepend) ~/.local/bin to $PATH
 ```
-{{< /alert >}} 
+{{< /alert >}}
 
 3. Ensure the version you have installed is up-to-date or the expected version:
 
