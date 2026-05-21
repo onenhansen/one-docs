@@ -121,7 +121,7 @@ For Windows desktops using **Chrome** or **Firefox** you should disable the opti
 
 ### Kubernetes
 
-| K8s Version | Documentation |
+| **K8s Version** | **Documentation** |
 |-------------|---------------|
 | 1.34.2      | [v1.34](https://v1-34.docs.kubernetes.io/docs/home/) |
 | 1.33.7      | [v1.33](https://v1-33.docs.kubernetes.io/docs/home/) |
