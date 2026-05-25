@@ -19,6 +19,9 @@ Include a high level description and a link to the documentation explaining the 
 
 -->
 
+* Support for SRIOV capable network interfaces in [switchdev mode]({{% relref "product/cluster_configuration/hosts_and_clusters/pci_passthrough.md#usage-as-network-interfaces" %}})
+
+
 ## Resolved Issues
 
 The following issues have been solved in 7.2.2:
