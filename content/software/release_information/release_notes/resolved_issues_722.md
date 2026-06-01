@@ -10,12 +10,12 @@ A complete list of solved issues for 7.2.2 are listed in the [project developmen
 The following new features have been backported to 7.2.2:
 
 * Add Windows OS Profile/Best practices VM template options to `oneswap` Windows conversion [7351](https://github.com/OpenNebula/one/issues/7351).
+* Support for SR-IOV capable network interfaces in [switchdev mode]({{% relref "product/cluster_configuration/hosts_and_clusters/pci_passthrough.md#usage-as-network-interfaces" %}}).
 
 <!-- item structure
 Include a high level description and a link to the documentation explaining the new feature. Example:
 
 * Add per-VM live migration options through [`MIGRATE_AUTO_CONVERGE` and `MIGRATE_COMPRESSED`]({{% relref "/product/operation_references/configuration_references/template#template-features" %}}) VM template attributes. Administrators can now tune auto-convergence and memory compression only for selected KVM VMs, improving migration reliability and bandwidth usage without changing global driver defaults.
-
 -->
 
 ## Resolved Issues
