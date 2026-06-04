@@ -149,7 +149,7 @@ Ubuntu/Debian
 
 ```bash
 apt-get update
-apt-get install --only-upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration python3-pyone
+apt-get install --only-upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration opennebula-guacd python3-pyone
 ```
 
 RHEL
@@ -158,7 +158,7 @@ RHEL
 On RHEL/AlmaLinux 9, upgrading from OpenNebula 7.0 to 7.2 may fail due to conflicts between the distro nodejs 16 packages and the nodesource nodejs 20 required by `opennebula-fireedge`. Please check the [Known Issues]({{% relref "../../release_information/release_notes/known_issues#upgrade" %}}) for the workaround.{{< /alert >}}
 
 ```bash
-yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration python3-pyone
+yum upgrade opennebula opennebula-gate opennebula-flow opennebula-fireedge opennebula-migration opennebula-guacd python3-pyone
 ```
 
 <!-- TODO: Add SLES/openSUSE upgrade instructions (zypper) once there is a previous SUSE release to upgrade from (SUSE support was introduced in 7.2). -->
