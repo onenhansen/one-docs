@@ -13,6 +13,7 @@ For details on contributing to the documentation, including full instructions fo
 
 To build the documentation, you will need:
 
+<<<<<<< HEAD
 - The [Hugo](https://gohugo.io/) static site generator and web server: **extended version** `0.155.3`
 - [Go](https://go.dev/doc/install)
 - [Node.js LTS](https://github.com/nodesource/distributions/blob/master/README.md#using-debian-as-root-nodejs-current)
@@ -397,6 +398,9 @@ Formatted output:
 | `--name name`               | Name of the new Image                                                 |
 | `--datastore name \| ID`    | Name/ID of the Datastore to store the new Image                       |
 | `--description description` | Description for the new Image (Optional)                              |
+=======
+To build the documentation, follow the [documentation build instructions](https://github.com/OpenNebula/one-docs/wiki/Build) in the Wiki. Details about how to contribute to the documentation, including style and structure guidance, can be found in the [Wiki for this repository](https://github.com/OpenNebula/one-docs/wiki).
+>>>>>>> e3f574f2 (M #~: Update repo references for website -> one-docs rename (#693))
 
 
 #### Table Formatting
