@@ -106,7 +106,37 @@ The interactive CLI flow asks for:
 * **Kubernetes Version**: The Kubernetes version to deploy.
 * **K8s Cluster Flavour**: The control-plane flavour, such as `standalone` or `ha`.
 
-{{< image path="/images/oneks/light/k8s_cluster_create_cli.png" alt="K8s Cluster create CLI menu" align="center" width="60%" mb="20px" >}}
+```shell
+$ oneks create cluster
+> Cluster name: example-oneks-cluster
+
+DEPLOYMENT PLACEMENT
+> OpenNebula cluster ID: 0
+> Public network ID: 0
+> Private network ID: 1
+
+ONEKS SPEC
+> Select a Kubernetes version for the Cluster:
+    0: v1.33.7
+    1: v1.34.2
+
+    Select an option by number: 1
+
+> Select a flavour for the Cluster:
+    0: Single-Node Control Plane
+       Single Control Plane node deployment.
+       Suitable for development, evaluation, and non-critical workloads.
+       1 node | 2 CPU | 2 vCPU | 4 GB RAM | 16 GB Storage
+
+    1: Highly Available Control Plane
+       Three-node Control Plane deployment with built-in redundancy.
+       Suitable for production and other environments that require higher availability.
+       3 nodes | 2 CPU | 2 vCPU | 4 GB RAM | 16 GB Storage
+
+    Select an option by number: 1
+
+ID: 10
+```
 
 You can also create a K8s Cluster from a JSON specification:
 
@@ -120,7 +150,7 @@ Example `spec.json`:
 {
   "name": "prod-cluster",
   "description": "Production Kubernetes cluster",
-  "kubernetes_version": "v1.32.9",
+  "kubernetes_version": "v1.34.2",
   "deployment": {
     "cluster": {
       "id": 0
@@ -153,7 +183,7 @@ curl -u "$(cat /var/lib/one/.one/one_auth)" \
   -d '{
     "name": "prod-cluster",
     "description": "Production Kubernetes cluster",
-    "kubernetes_version": "v1.32.9",
+    "kubernetes_version": "v1.34.2",
     "deployment": {
       "cluster": {
         "id": 0
@@ -271,7 +301,29 @@ The command starts an interactive creation flow. You will be asked to provide:
 * **Flavour**: The worker node size profile to use.
 * **Count**: The number of worker nodes to create.
 
-{{< image path="/images/oneks/light/oneks_create_nodegroup_cli.png" alt="OneKS create nodegroup CLI" align="center" width="60%" mb="20px" >}}
+```shell
+$ oneks create group --cluster-id 10
+> Nodegroup name: example-oneks-group
+> Select a flavour for the Nodegroup:
+    0: Small Worker Nodes
+       Small worker node profile for lightweight workloads.
+       2 CPU | 2 vCPU | 4 GB RAM | 16 GB Storage
+
+    1: Medium Worker Nodes
+       Medium worker node profile for balanced workloads.
+       4 CPU | 4 vCPU | 8 GB RAM | 32 GB Storage
+
+    2: Large Worker Nodes
+       Large worker node profile for demanding workloads.
+       8 CPU | 8 vCPU | 16 GB RAM | 64 GB Storage
+
+    Select an option by number: 2
+There are some parameters that require user input.
+  * (count) Number of Worker nodes [type: number]
+    Enter a number: 1
+
+ID: 11
+```
 
 Scale a node group by specifying its ID and the desired number of worker nodes:
 
@@ -282,7 +334,7 @@ oneks scale nodegroup <nodegroup_id> --target <worker_count>
 Example:
 
 ```shell
-oneks scale nodegroup 7 --target 3
+oneks scale nodegroup 11 --target 3
 ```
 
 Validate the Kubernetes node list:
@@ -290,10 +342,10 @@ Validate the Kubernetes node list:
 ```shell
 $ KUBECONFIG=./kubeconfig kubectl get nodes
 NAME                         STATUS   ROLES           AGE   VERSION
-test-cluster-control-plane   Ready    control-plane   9m    v1.31.4
-test-cluster-worker-1        Ready    <none>          2m    v1.31.4
-test-cluster-worker-2        Ready    <none>          2m    v1.31.4
-test-cluster-worker-3        Ready    <none>          2m    v1.31.4
+test-cluster-control-plane   Ready    control-plane   9m    v1.34.2
+test-cluster-worker-1        Ready    <none>          2m    v1.34.2
+test-cluster-worker-2        Ready    <none>          2m    v1.34.2
+test-cluster-worker-3        Ready    <none>          2m    v1.34.2
 ```
 
 {{% /tab %}}
@@ -331,10 +383,10 @@ Validate the Kubernetes node list:
 ```shell
 $ KUBECONFIG=./kubeconfig kubectl get nodes
 NAME                         STATUS   ROLES           AGE   VERSION
-test-cluster-control-plane   Ready    control-plane   9m    v1.31.4
-test-cluster-worker-1        Ready    <none>          2m    v1.31.4
-test-cluster-worker-2        Ready    <none>          2m    v1.31.4
-test-cluster-worker-3        Ready    <none>          2m    v1.31.4
+test-cluster-control-plane   Ready    control-plane   9m    v1.34.2
+test-cluster-worker-1        Ready    <none>          2m    v1.34.2
+test-cluster-worker-2        Ready    <none>          2m    v1.34.2
+test-cluster-worker-3        Ready    <none>          2m    v1.34.2
 ```
 
 For further details about the API, see the [OneKS REST API Reference]({{% relref "platform_services/oneks/references/oneks_api/" %}}).
@@ -381,7 +433,7 @@ oneks upgrade cluster <cluster_id> --k8s-version <version>
 Example:
 
 ```shell
-oneks upgrade cluster 42 --k8s-version v1.32.9
+oneks upgrade cluster 42 --k8s-version v1.34.2
 ```
 
 After the upgrade starts, inspect the K8s Cluster state:
@@ -405,7 +457,7 @@ curl -u "$(cat /var/lib/one/.one/one_auth)" \
   -X POST http://<oneks-server>:10780/api/v1/clusters/<cluster_id>/upgrade \
   -H "Content-Type: application/json" \
   -d '{
-    "kubernetes_version": "v1.32.9"
+    "kubernetes_version": "v1.34.2"
   }'
 ```
 
