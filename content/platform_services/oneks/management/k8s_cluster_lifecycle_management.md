@@ -31,6 +31,7 @@ Before creating a K8s Cluster, verify that:
 * **OneKS Service**: The OneKS service is configured and running.
 * **OneGate Service**: OneGate is configured and reachable.
 * **Transparent Proxy**: `tproxy` is configured for the required OneGate and OpenNebula XML-RPC ports.
+* **OpenNebula Cluster**: The target OpenNebula Cluster ID is known.
 * **Networks**: The OpenNebula public and private Virtual Network IDs are known.
 * **Profiles**: The required family and flavour are available.
 * **Kubernetes Version**: The target Kubernetes version is supported by the selected family.
@@ -40,6 +41,8 @@ Before creating a K8s Cluster, verify that:
 {{< alert title="Note" type="primary" >}}
 For more detailed information about the basic configuration and requirements needed to create K8s Clusters, refer to the [Basic Configuration Guide]({{% relref "platform_services/oneks/getting_started/basic_configuration" %}}).
 {{< /alert >}}
+
+Deployment options let you choose where each K8s Cluster is placed and which OpenNebula resources it uses. This makes it possible to provision independent K8s Clusters in different OpenNebula Clusters from the same OneKS service. For each deployment, you can select the target OpenNebula Cluster and the public and private Virtual Networks that will be used by the K8s Cluster. The selected networks must be available in the target OpenNebula Cluster. The OneKS appliance required by the selected control-plane family must also be available in an image datastore that can be used from that placement.
 
 {{< tabpane text=true right=false >}}
 {{% tab header="**Interfaces**:" disabled=true /%}}
@@ -54,6 +57,7 @@ alt="OneKS create Cluster step 1" align="center" width="90%" mb="20px" >}}
 The wizard guides you through the required configuration steps:
 
 * **General**: K8s Cluster name and optional description.
+* **Select a OpenNebula Cluster ID**: The OpenNebula Cluster used for K8s Cluster placement.
 * **Select a Public Virtual Network**: Public network used for external connectivity and bootstrap paths.
 * **Select a Private Virtual Network**: Private network used for internal K8s Cluster communication.
 * **Kubernetes Version**: Kubernetes version to deploy.
@@ -79,6 +83,14 @@ ID USER     GROUP    NAME         CLUSTERS   BRIDGE   STATE
  0 oneadmin oneadmin public       0          br1      rdy
 ```
 
+Also identify the OpenNebula Cluster where the K8s Cluster must be deployed:
+
+```shell
+$ onecluster list
+ID NAME          HOSTS   VNETS  DATASTORES
+ 0 default           2       2           3
+```
+
 Launch the interactive K8s Cluster creation command. You can add `--wait` to subscribe to the deployment logs and keep the command attached until the operation completes or reaches a terminal state:
 
 ```shell
@@ -88,10 +100,11 @@ oneks create cluster --wait
 The interactive CLI flow asks for:
 
 * **K8s Cluster Name**: The name used to identify the OneKS K8s Cluster.
-* **Kubernetes Version**: The Kubernetes version to deploy.
-* **K8s Cluster Flavour**: The control-plane flavour, such as `standalone` or `ha`.
+* **OpenNebula Cluster ID**: The OpenNebula Cluster used for K8s Cluster placement.
 * **Public Network ID**: The OpenNebula public Virtual Network used by the K8s Cluster.
 * **Private Network ID**: The OpenNebula private Virtual Network used by the K8s Cluster.
+* **Kubernetes Version**: The Kubernetes version to deploy.
+* **K8s Cluster Flavour**: The control-plane flavour, such as `standalone` or `ha`.
 
 {{< image path="/images/oneks/light/k8s_cluster_create_cli.png" alt="K8s Cluster create CLI menu" align="center" width="60%" mb="20px" >}}
 
@@ -108,8 +121,19 @@ Example `spec.json`:
   "name": "prod-cluster",
   "description": "Production Kubernetes cluster",
   "kubernetes_version": "v1.32.9",
-  "public_network": 12,
-  "private_network": 34,
+  "deployment": {
+    "cluster": {
+      "id": 0
+    },
+    "networks": {
+      "public": {
+        "id": 12
+      },
+      "private": {
+        "id": 34
+      }
+    }
+  },
   "spec": {
     "flavour": "ha"
   }
@@ -130,8 +154,19 @@ curl -u "$(cat /var/lib/one/.one/one_auth)" \
     "name": "prod-cluster",
     "description": "Production Kubernetes cluster",
     "kubernetes_version": "v1.32.9",
-    "public_network": 0,
-    "private_network": 1,
+    "deployment": {
+      "cluster": {
+        "id": 0
+      },
+      "networks": {
+        "public": {
+          "id": 0
+        },
+        "private": {
+          "id": 1
+        }
+      }
+    },
     "spec": {
       "flavour": "ha"
     }
