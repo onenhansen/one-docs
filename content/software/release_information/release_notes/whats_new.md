@@ -49,3 +49,4 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * [Fix Improve live migration options for busy guests](https://github.com/OpenNebula/one/issues/5774).
 * [Fix Units in "Size on instantiate" VM Template instantiation](https://github.com/OpenNebula/one/issues/7672).
 * [Fix VM log is not showing up in the FireEdge if USE_VMS_LOCATION=YES](https://github.com/OpenNebula/one/issues/7680).
+* [Fix VM CDROM hot-attach without target or dev-prefix](https://github.com/OpenNebula/one/issues/7736).
