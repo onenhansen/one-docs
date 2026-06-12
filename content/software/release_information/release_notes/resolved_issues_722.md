@@ -29,6 +29,7 @@ The following issues have been solved in 7.2.2:
 * Fix PCI attach to prevent bus address collisions [#7695](https://github.com/OpenNebula/one/issues/7695)
 * Fix lack of VLAN tags clearance in OVS when removing them from virtual network [#7707](https://github.com/OpenNebula/one/issues/7707)
 * Fix OneKS lifecycle operations after renaming a cluster by using stable Kubernetes identifiers [#7724](https://github.com/OpenNebula/one/issues/7724).
+* Fix OneKS group recovery when stuck in WARNING state after cluster host reboot [#7748](https://github.com/OpenNebula/one/issues/7748).
 * `oneswap` Add support for batch VM conversion [#7726](https://github.com/OpenNebula/one/issues/7726)
 * Fix LVM (EE) post-reboot activation silently skipping VM disks [#7720](https://github.com/OpenNebula/one/issues/7720).
 
