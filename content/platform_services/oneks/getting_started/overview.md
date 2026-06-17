@@ -9,7 +9,7 @@ weight: "1"
 type: docs
 ---
 
-OneKS provides Elastic Kubernetes as a Service on OpenNebula. It offers a structured way to create, access, operate, upgrade, recover, and deprovision Kubernetes Clusters (K8s Clusters) by combining a user-facing service layer with Cluster API-based infrastructure provisioning through CAPONE, the Cluster API provider for OpenNebula.
+OneKS provides Elastic Kubernetes-as-a-Service on OpenNebula. It offers a structured way to create, access, operate, upgrade, recover, and deprovision Kubernetes Clusters (K8s Clusters) by combining a user-facing service layer with Cluster API-based infrastructure provisioning through CAPONE, the Cluster API provider for OpenNebula.
 
 OneKS is designed for teams that need a simple and repeatable way to consume Kubernetes inside OpenNebula. Typical use cases include development and test environments, self-service Kubernetes delivery in private cloud environments, and standardized Cluster offerings for different sizes and topologies.
 
