@@ -1,0 +1,38 @@
+{
+  "id": "quickstart-login",
+  "description": "Example recipe showing how captures are expressed. This can run against an already available Sunstone URL.",
+  "captures": [
+    {
+      "id": "login-page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "${SUNSTONE_URL}"
+        },
+        {
+          "action": "waitForSelector",
+          "selector": "input[name='user'], input[type='text']"
+        },
+        {
+          "action": "fill",
+          "selector": "input[name='user'], input[type='text']",
+          "value": "${SUNSTONE_USER}"
+        },
+        {
+          "action": "fill",
+          "selector": "input[name='token'], input[type='password']",
+          "value": "${SUNSTONE_PASSWORD}"
+        },
+        { "action": "click", "selector": "button:has-text('Sign In Now')" },
+        {
+          "action": "waitTime",
+          "timeout": 2000
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false
+      }
+    }
+  ]
+}

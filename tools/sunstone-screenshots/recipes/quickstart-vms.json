@@ -1,0 +1,53 @@
+{
+  "id": "quickstart-login",
+  "description": "Example recipe showing how captures are expressed. This can run against an already available Sunstone URL.",
+  "captures": [
+    {
+      "id": "login-page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "${SUNSTONE_URL}"
+        },
+        {
+          "action": "waitForSelector",
+          "selector": "input[name='user'], input[type='text']"
+        },
+        {
+          "action": "fill",
+          "selector": "input[name='user'], input[type='text']",
+          "value": "${SUNSTONE_USER}"
+        },
+        {
+          "action": "fill",
+          "selector": "input[name='token'], input[type='password']",
+          "value": "${SUNSTONE_PASSWORD}"
+        },
+        { "action": "click", "selector": "button:has-text('Sign In Now')" },
+        {
+          "action": "waitTime",
+          "timeout": 2000
+        },
+        { "action": "hover", "selector": "div[data-cy='sidebar']" },
+        {
+          "action": "waitTime",
+          "timeout": 1000
+        },
+        { "action": "click", "selector": "div[data-cy='instances']" },
+        {
+          "action": "waitTime",
+          "timeout": 1000
+        },
+        { "action": "click", "selector": "div[data-cy='main-menu-item'][role='button']:has-text('Virtual Routers')" },
+        {
+          "action": "waitTime",
+          "timeout": 3000
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false
+      }
+    }
+  ]
+}

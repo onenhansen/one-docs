@@ -1,0 +1,49 @@
+{
+  "$schema": "./schemas/manifest.schema.json",
+  "version": 1,
+  "defaults": {
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1
+    },
+    "locale": "en-US",
+    "theme": "light",
+    "sunstone": {
+      "url": "${SUNSTONE_URL}",
+      "username": "${SUNSTONE_USER}",
+      "password": "${SUNSTONE_PASSWORD}"
+    }
+  },
+  "environments": {
+    "local-minione-nightly": {
+      "kind": "opennebula-vm",
+      "template": "docs-sunstone-minione",
+      "install": {
+        "channel": "nightly",
+        "repo": "internal-infra",
+        "sshuttleProfile": "opennebula-infra"
+      },
+      "provisionCommand": "tools/sunstone-screenshots/provisioners/opennebula-vm.sh local-minione-nightly",
+      "teardownCommand": "tools/sunstone-screenshots/provisioners/opennebula-vm.sh teardown local-minione-nightly",
+      "notes": "Initial target for quickstart and general Sunstone screenshots."
+    }
+  },
+  "screenshots": [
+    {
+      "id": "quickstart.sunstone-login.light",
+      "title": "Quickstart Sunstone login page",
+      "doc": "content/software/installation_process/frontend_installation/automated.md",
+      "docLine": 126,
+      "image": "assets/images/quickstart/light/sunstone_login_page.png",
+      "darkImage": "assets/images/quickstart/dark/sunstone_login_page.png",
+      "environment": "local-minione-nightly",
+      "recipe": "recipes/quickstart-vms.json",
+      "capture": "login-page",
+      "theme": "both",
+      "tags": ["quickstart", "sunstone", "login"],
+      "status": "draft",
+      "notes": "Example entry only; replace selectors with stable Sunstone test IDs when available."
+    }
+  ]
+}

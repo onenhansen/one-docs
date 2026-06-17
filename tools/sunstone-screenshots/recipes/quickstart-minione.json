@@ -1,0 +1,130 @@
+{
+  "id": "quickstart-minione",
+  "description": "Minione Quickstart.",
+  "themeSteps": {
+    "light": [
+      {
+        "action": "waitTime",
+        "timeout": 250
+      }
+    ],
+    "dark": [
+      {
+        "action": "waitTime",
+        "timeout": 250
+      }
+    ]
+  },
+  "captures": [
+    {
+      "id": "login-page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "${SUNSTONE_URL}"
+        },
+        {
+          "action": "waitForSelector",
+          "selector": "input[name='user'], input[type='text']"
+        }
+      ],
+      "screenshot": {
+        "selector": "div.MuiBox-root",
+        "omitBackground": false,
+        "buffer": "50"
+      }
+    },
+    {
+      "id": "dashboard",
+      "steps": [
+        {
+          "action": "fill",
+          "selector": "input[name='user'], input[type='text']",
+          "value": "${SUNSTONE_USER}"
+        },
+        {
+          "action": "fill",
+          "selector": "input[name='token'], input[type='password']",
+          "value": "${SUNSTONE_PASSWORD}"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text('Sign In Now')"
+        },
+        {
+          "action": "waitForSelector",
+          "selector": "div[data-cy='sidebar']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 1000
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false,
+        "clip": {
+          "leftPercent": 0,
+          "rightPercent": 100,
+          "topPercent": 0,
+          "bottomPercent": 40
+        }
+      }
+    },
+    {
+      "id": "vnetwork-menu",
+      "steps": [
+        {
+          "action": "hover",
+          "selector": "div[data-cy='sidebar']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 500
+        },
+        {
+          "action": "click",
+          "selector": "div[data-cy='networks']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 500
+        },
+        {
+          "action": "hover",
+          "selector": "div[data-cy='main-menu-item'][role='button']:has-text('Virtual networks')"
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false
+      }
+    },
+    {
+      "id": "vm-templates",
+      "steps": [
+        {
+          "action": "hover",
+          "selector": "div[data-cy='sidebar']"
+        },
+        {
+          "action": "click",
+          "selector": "div[data-cy='templates']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 1500
+        },
+        {
+          "action": "defocus",
+          "xPercent": 50,
+          "yPercent": 50
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "quickstart-login",
+  "description": "Example recipe showing how captures are expressed. This can run against an already available Sunstone URL.",
+  "captures": [
+    {
+      "id": "login-page",
+      "steps": [
+        {
+          "action": "goto",
+          "url": "${SUNSTONE_URL}"
+        },
+        {
+          "action": "waitForSelector",
+          "selector": "input[name='username'], input[type='text']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 1000
+        }
+      ],
+      "screenshot": {
+        "selector": "div.MuiBox-root",
+        "omitBackground": false,
+        "buffer": "50"
+      }
+    }
+  ]
+}

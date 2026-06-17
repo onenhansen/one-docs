@@ -1,0 +1,86 @@
+{
+  "$schema": "./schemas/manifest.schema.json",
+  "version": 1,
+  "defaults": {
+    "viewport": {
+      "width": 1440,
+      "height": 1000,
+      "deviceScaleFactor": 1
+    },
+    "locale": "en-US",
+    "theme": "light",
+    "sunstone": {
+      "url": "${SUNSTONE_URL}",
+      "username": "${SUNSTONE_USER}",
+      "password": "${SUNSTONE_PASSWORD}"
+    }
+  },
+  "environments": {
+    "existing-sunstone": {
+      "kind": "existing-sunstone",
+      "notes": "Use SUNSTONE_URL, SUNSTONE_USER, and SUNSTONE_PASSWORD from the local shell."
+    }
+  },
+  "screenshots": [
+    {
+      "id": "quickstart.sequence.login-page",
+      "title": "Quickstart login page",
+      "doc": "content/software/installation_process/frontend_installation/automated.md",
+      "docLine": 126,
+      "image": "assets/images/quickstart/light/sunstone_login_page.png",
+      "darkImage": "assets/images/quickstart/dark/sunstone_login_page.png",
+      "environment": "existing-sunstone",
+      "recipe": "recipes/quickstart-vms-sequence.json",
+      "capture": "login-page",
+      "theme": "both",
+      "tags": ["quickstart", "quickstart-sequence", "sunstone", "login"],
+      "status": "draft",
+      "notes": "First capture in the sequence. The next capture continues from this page state."
+    },
+    {
+      "id": "quickstart.sequence.dashboard",
+      "title": "Quickstart Sunstone dashboard",
+      "doc": "content/software/installation_process/frontend_installation/automated.md",
+      "docLine": 136,
+      "image": "assets/images/quickstart/light/sunstone_dashboard.png",
+      "darkImage": "assets/images/quickstart/dark/sunstone_dashboard.png",
+      "environment": "existing-sunstone",
+      "recipe": "recipes/quickstart-vms-sequence.json",
+      "capture": "dashboard",
+      "theme": "both",
+      "tags": ["quickstart", "quickstart-sequence", "sunstone", "dashboard"],
+      "status": "draft",
+      "notes": "Second capture. It logs in using the browser state from the login-page capture."
+    },
+    {
+      "id": "quickstart.sequence.instances-menu",
+      "title": "Quickstart instances menu",
+      "doc": "content/software/installation_process/frontend_installation/automated.md",
+      "docLine": 172,
+      "image": "assets/images/quickstart/light/sunstone_network_details.png",
+      "darkImage": "assets/images/quickstart/dark/sunstone_network_details.png",
+      "environment": "existing-sunstone",
+      "recipe": "recipes/quickstart-vms-sequence.json",
+      "capture": "instances-menu",
+      "theme": "both",
+      "tags": ["quickstart", "quickstart-sequence", "sunstone", "navigation"],
+      "status": "draft",
+      "notes": "Third capture. It opens the Instances section before selecting VM Templates."
+    },
+    {
+      "id": "quickstart.sequence.vm-templates",
+      "title": "Quickstart VM templates list",
+      "doc": "content/software/installation_process/frontend_installation/automated.md",
+      "docLine": 172,
+      "image": "assets/images/quickstart/light/sunstone_vm_templates_alpine.png",
+      "darkImage": "assets/images/quickstart/dark/sunstone_vm_templates_alpine.png",
+      "environment": "existing-sunstone",
+      "recipe": "recipes/quickstart-vms-sequence.json",
+      "capture": "vm-templates",
+      "theme": "both",
+      "tags": ["quickstart", "quickstart-sequence", "sunstone", "vm-templates"],
+      "status": "draft",
+      "notes": "Fourth capture. This demonstrates another manifest entry using the same recipe execution."
+    }
+  ]
+}

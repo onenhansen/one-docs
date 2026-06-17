@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opennebula.io/schemas/sunstone-screenshot-manifest.schema.json",
+  "title": "Sunstone screenshot automation manifest",
+  "type": "object",
+  "required": ["version", "screenshots"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "viewport": {
+          "$ref": "#/$defs/viewport"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "theme": {
+          "enum": ["light", "dark"]
+        },
+        "sunstone": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "environments": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/environment"
+      }
+    },
+    "screenshots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/screenshot"
+      }
+    }
+  },
+  "$defs": {
+    "environment": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": true,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Provisioning backend, for example opennebula-vm, existing-sunstone, or manual."
+        },
+        "template": {
+          "type": "string"
+        },
+        "install": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "provisionCommand": {
+          "type": "string",
+          "description": "Optional local command that prepares the environment and prints Sunstone connection details."
+        },
+        "teardownCommand": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "screenshot": {
+      "type": "object",
+      "required": ["id", "doc", "image", "recipe", "capture"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "doc": {
+          "type": "string"
+        },
+        "docLine": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "image": {
+          "type": "string",
+          "description": "Repository-relative path to the canonical light/current image."
+        },
+        "darkImage": {
+          "type": "string",
+          "description": "Repository-relative path to the dark-mode variant, when the docs page uses one."
+        },
+        "environment": {
+          "type": "string"
+        },
+        "recipe": {
+          "type": "string"
+        },
+        "capture": {
+          "type": "string"
+        },
+        "viewport": {
+          "$ref": "#/$defs/viewport"
+        },
+        "theme": {
+          "enum": ["light", "dark", "both"]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "owner": {
+          "type": "string"
+        },
+        "status": {
+          "enum": ["draft", "ready", "disabled"]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "viewport": {
+      "type": "object",
+      "required": ["width", "height"],
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 320
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 320
+        },
+        "deviceScaleFactor": {
+          "type": "number",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

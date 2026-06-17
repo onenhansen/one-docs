@@ -3,6 +3,10 @@ public/
 node_modules/
 _vendor/
 resources/
+__pycache__/
+*.pyc
 .hugo_build.lock
 package.json
 package-lock.json
+.sunstone-screenshots/
+AGENTS.md
