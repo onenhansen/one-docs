@@ -1,6 +1,7 @@
 ---
-title: "Service Architecture"
+title: "OneKS Service Architecture"
 linkTitle: "Service Architecture"
+cardTitle: "Service Architecture"
 date: "2026-05-12"
 description:
 categories:

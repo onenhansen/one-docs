@@ -3,6 +3,7 @@ title: "Managing Kubernetes with Rancher and the Cluster API"
 date: "2025-02-17"
 type: docs
 description:
+toc_hide: true
 ---
 
 <a id="running-kubernetes-clusters"></a>

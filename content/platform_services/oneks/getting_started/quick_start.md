@@ -1,6 +1,7 @@
 ---
-title: "Quick Start"
-linkTitle: "Quick Start"
+title: "OneKS Quickstart"
+linkTitle: "Quickstart"
+cardTitle: "Quickstart"
 date: "2026-05-12"
 description:
 categories:

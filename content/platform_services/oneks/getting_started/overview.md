@@ -20,6 +20,7 @@ OneKS builds on CAPONE to expose a K8s Cluster-centric lifecycle model for users
 If you have not used OneKS before, you should start by reading the [Basic Configuration Guide]({{% relref "platform_services/oneks/getting_started/basic_configuration/" %}}) to set up OneKS then follow the [Quick-start Guide]({{% relref "platform_services/oneks/getting_started/quick_start/" %}}) where you will learn to set up a basic K8s Cluster with OneKS. After completing the Quick-start Guide, move on to [Core Concepts]({{% relref "platform_services/oneks/getting_started/core_concepts/" %}}) to familiarize yourself with key OneKS concepts. 
 
 After completing the introductory documentation, you can find more information about managing K8s Clusters with OneKS in the following reference documentation:
+
 * [K8s Cluster Lifecycle Management]({{% relref "platform_services/oneks/management/k8s_cluster_lifecycle_management/" %}})
 * [Monitoring and Troubleshooting]({{% relref "platform_services/oneks/management/monitoring_and_troubleshooting/" %}})
 * [Configuration]({{% relref "platform_services/oneks/management/configuration/" %}})

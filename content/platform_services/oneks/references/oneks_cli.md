@@ -1,6 +1,7 @@
 ---
-title: "CLI Reference"
+title: "OneKS CLI Reference"
 linkTitle: "CLI"
+cardTitle: "CLI Reference"
 date: "2026-05-12"
 description:
 categories:

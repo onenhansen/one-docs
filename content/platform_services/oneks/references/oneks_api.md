@@ -1,6 +1,7 @@
 ---
-title: "REST API Reference"
+title: "OneKS REST API Reference"
 linkTitle: "API"
+cardTitle: "REST API Reference"
 date: "2026-05-12"
 description:
 categories:
