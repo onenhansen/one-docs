@@ -250,6 +250,7 @@ Supported actions in the initial runner:
 - `setColorScheme`
 - `pause`
 - `click`
+- `switchToPage`
 - `fill`
 - `press`
 - `evaluate`
@@ -445,6 +446,35 @@ Pixel bounds are also supported:
 The bounds are left/right/top/bottom, not x/y/width/height. If `clip` is set,
 the crop is taken from the viewport. If `clip` is not set, `selector` and
 `buffer` work as before.
+
+### New Tabs
+
+Some Sunstone actions open a new browser tab, such as a VNC console. Mark the
+step that opens the tab with `opensPage: true`; the runner will wait for the new
+tab and make it the active page for later steps and screenshots:
+
+```json
+{
+  "action": "click",
+  "selector": "button[data-cy$='-vnc']",
+  "opensPage": true,
+  "newPageWaitForLoadState": "domcontentloaded"
+}
+```
+
+Any following `waitTime`, `waitForSelector`, or `screenshot` will use the new
+tab. If the tab is already open and you just need to switch to it:
+
+```json
+{ "action": "switchToPage", "target": "last" }
+```
+
+Supported `switchToPage` targets are `last`, `first`, `previous`, or an explicit
+zero-based page `index`:
+
+```json
+{ "action": "switchToPage", "index": 1 }
+```
 
 ## VM Provisioning Path
 

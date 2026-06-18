@@ -97,33 +97,203 @@
       ],
       "screenshot": {
         "selector": "body",
-        "omitBackground": false
+        "omitBackground": false,
+        "clip": {
+          "leftPercent": 0,
+          "rightPercent": 60,
+          "topPercent": 0,
+          "bottomPercent": 50
+        }
       }
     },
     {
-      "id": "vm-templates",
+      "id": "vnetwork-details",
+      "steps": [
+        {
+          "action": "waitTime",
+          "timeout": 500
+        },
+        {
+          "action": "click",
+          "selector": "div[data-cy='main-menu-item'][role='button']:has-text('Virtual networks')"
+        },
+        {
+          "action": "defocus",
+          "xPercent": 50,
+          "yPercent": 50
+        },
+        {
+          "action": "click",
+          "selector": "div[data-cy^='network-'][role='row']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 500
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false,
+        "clip": {
+          "leftPercent": 0,
+          "rightPercent": 100,
+          "topPercent": 0,
+          "bottomPercent": 80
+        }
+      }
+    },
+    {
+      "id": "vm-template",
       "steps": [
         {
           "action": "hover",
           "selector": "div[data-cy='sidebar']"
         },
         {
+          "action": "waitTime",
+          "timeout": 500
+        },
+        {
           "action": "click",
           "selector": "div[data-cy='templates']"
         },
         {
-          "action": "waitTime",
-          "timeout": 1500
+          "action": "click",
+          "selector": "div[data-cy='main-menu-item'][role='button']:has-text('VM Templates')"
         },
         {
           "action": "defocus",
           "xPercent": 50,
           "yPercent": 50
+        },
+        {
+          "action": "waitTime",
+          "timeout": 500
         }
       ],
       "screenshot": {
         "selector": "body",
-        "omitBackground": false
+        "omitBackground": false,
+        "clip": {
+          "leftPercent": 0,
+          "rightPercent": 100,
+          "topPercent": 0,
+          "bottomPercent": 50
+        }
+      }
+    },
+    {
+      "id": "vm-instantiate",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "div[data-cy^='template-'][role='row']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 500
+        },
+        {
+          "action": "click",
+          "selector": "button[data-cy='action-instantiate_dialog']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 1000
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false,
+        "clip": {
+          "leftPercent": 0,
+          "rightPercent": 100,
+          "topPercent": 0,
+          "bottomPercent": 80
+        }
+      }
+    },
+    {
+      "id": "vm-instantiate-2",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button[data-cy='stepper-next-button']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 500
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false,
+        "clip": {
+          "leftPercent": 0,
+          "rightPercent": 100,
+          "topPercent": 0,
+          "bottomPercent": 80
+        }
+      }
+    },
+    {
+      "id": "vm-instances",
+      "steps": [
+        {
+          "action": "click",
+          "selector": "button[data-cy='stepper-next-button']:has-text('Finish')"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 7000
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false,
+        "clip": {
+          "leftPercent": 0,
+          "rightPercent": 100,
+          "topPercent": 0,
+          "bottomPercent": 50
+        }
+      }
+    },
+    {
+      "id": "vnc",
+      "steps": [
+        {
+          "action": "waitTime",
+          "timeout": 5000
+        },
+        {
+          "action": "click",
+          "selector": "button[data-cy='refresh']"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 1000
+        },
+        {
+          "action": "click",
+          "selector": "button[data-cy$='-vnc']",
+          "opensPage": true,
+          "newPageWaitForLoadState": "domcontentloaded"
+        },
+        {
+          "action": "waitTime",
+          "timeout": 10000
+        }
+      ],
+      "screenshot": {
+        "selector": "body",
+        "omitBackground": false,
+        "clip": {
+          "leftPercent": 20,
+          "rightPercent": 80,
+          "topPercent": 0,
+          "bottomPercent": 100
+        }
       }
     }
   ]

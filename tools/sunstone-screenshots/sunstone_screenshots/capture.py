@@ -80,7 +80,7 @@ def capture_screenshots(
                 page = context.new_page()
                 try:
                     for step_index, step in enumerate(recipe.get("setup", []), start=1):
-                        _run_debug_step(
+                        page = _run_debug_step(
                             page,
                             step,
                             {},
@@ -97,7 +97,7 @@ def capture_screenshots(
 
                         env = {"SCREENSHOT_CAPTURE": str(capture_id)}
                         for step_index, step in enumerate(capture.get("steps", []), start=1):
-                            _run_debug_step(
+                            page = _run_debug_step(
                                 page,
                                 step,
                                 env,
@@ -204,55 +204,63 @@ def _load_recipe(path: Path) -> dict[str, Any]:
     return recipe
 
 
-def _run_step(page: Any, step: dict[str, Any], variables: dict[str, str]) -> None:
+def _run_step(page: Any, step: dict[str, Any], variables: dict[str, str]) -> Any:
     action = step.get("action")
     if not action:
         raise CaptureError(f"Recipe step is missing action: {step}")
 
     if action == "goto":
         page.goto(_expand(step["url"], variables), wait_until=step.get("waitUntil", "networkidle"))
-        return
+        return page
     if action == "waitForSelector":
         page.wait_for_selector(_expand(step["selector"], variables), timeout=step.get("timeout", 30000))
-        return
+        return page
     if action == "waitForURL":
         page.wait_for_url(_expand(step["url"], variables), timeout=step.get("timeout", 30000))
-        return
+        return page
     if action == "waitForLoadState":
         page.wait_for_load_state(step.get("state", "networkidle"))
-        return
+        return page
     if action == "waitTime":
         page.wait_for_timeout(step.get("timeout", 5000))
-        return
+        return page
     if action == "hover":
         _locator(page, step, variables).hover()
-        return
+        return page
     if action == "moveMouse":
         x, y = _point_from_step(page, step, default_x_percent=50, default_y_percent=50)
         page.mouse.move(x, y)
-        return
+        return page
     if action == "defocus":
         x, y = _point_from_step(page, step, default_x_percent=50, default_y_percent=50)
         page.mouse.move(x, y)
-        return
+        return page
     if action == "setColorScheme":
         page.emulate_media(color_scheme=step.get("scheme", "light"))
-        return
+        return page
     if action == "pause":
         page.pause()
-        return
+        return page
     if action == "click":
+        if step.get("opensPage"):
+            return _run_action_that_opens_page(
+                page,
+                step,
+                lambda: _locator(page, step, variables).click(),
+            )
         _locator(page, step, variables).click()
-        return
+        return page
     if action == "fill":
         _locator(page, step, variables).fill(_expand(step.get("value", ""), variables))
-        return
+        return page
     if action == "press":
         _locator(page, step, variables).press(step["key"])
-        return
+        return page
     if action == "evaluate":
         page.evaluate(_expand(step["script"], variables))
-        return
+        return page
+    if action == "switchToPage":
+        return _switch_to_page(page, step)
 
     raise CaptureError(f"Unsupported recipe action: {action}")
 
@@ -265,7 +273,7 @@ def _run_debug_step(
     debug: bool,
     pause_before_step: bool,
     pause_after_step: bool,
-) -> None:
+) -> Any:
     if debug:
         print(f"{label}: {_step_summary(step, variables)}")
 
@@ -273,11 +281,13 @@ def _run_debug_step(
         print(f"Paused before {label}. Resume in Playwright Inspector.")
         page.pause()
 
-    _run_step(page, step, variables)
+    page = _run_step(page, step, variables)
 
     if pause_after_step or step.get("pauseAfter"):
         print(f"Paused after {label}. Resume in Playwright Inspector.")
         page.pause()
+
+    return page
 
 
 def _step_summary(step: dict[str, Any], variables: dict[str, str]) -> str:
@@ -286,6 +296,45 @@ def _step_summary(step: dict[str, Any], variables: dict[str, str]) -> str:
         if key in step:
             return f"{action} {key}={_expand(str(step[key]), variables)!r}"
     return str(action)
+
+
+def _run_action_that_opens_page(page: Any, step: dict[str, Any], action: Any) -> Any:
+    timeout = int(step.get("timeout", 30000))
+    with page.context.expect_page(timeout=timeout) as page_info:
+        action()
+
+    new_page = page_info.value
+    wait_state = step.get("newPageWaitForLoadState", "domcontentloaded")
+    if wait_state:
+        new_page.wait_for_load_state(wait_state, timeout=timeout)
+    new_page.bring_to_front()
+    return new_page
+
+
+def _switch_to_page(page: Any, step: dict[str, Any]) -> Any:
+    pages = page.context.pages
+    if not pages:
+        raise CaptureError("No browser pages are open.")
+
+    if "index" in step:
+        next_page = pages[int(step["index"])]
+    else:
+        target = step.get("target", "last")
+        if target == "last":
+            next_page = pages[-1]
+        elif target == "first":
+            next_page = pages[0]
+        elif target == "previous":
+            current_index = pages.index(page) if page in pages else len(pages) - 1
+            next_page = pages[max(current_index - 1, 0)]
+        else:
+            raise CaptureError(f"Unsupported switchToPage target: {target}")
+
+    wait_state = step.get("waitForLoadState")
+    if wait_state:
+        next_page.wait_for_load_state(wait_state, timeout=step.get("timeout", 30000))
+    next_page.bring_to_front()
+    return next_page
 
 
 def _prepare_screenshot_variant(
@@ -308,7 +357,7 @@ def _prepare_screenshot_variant(
         ("screenshot", capture.get("screenshot", {})),
     ):
         for step_index, step in enumerate(_theme_steps(source, variant), start=1):
-            _run_debug_step(
+            page = _run_debug_step(
                 page,
                 step,
                 variables,
