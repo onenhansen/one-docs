@@ -33,7 +33,7 @@ OpenNebula can manage both single VMs and complex multi-tier services composed o
 
 ### Containerized Applications with Elastic Kubernetes
 
-OpenNebula supports the automated deployment of Kubernetes Clusters through OneKS, the OpenNebula Elastic Kubernetes Service. OneKS provides Kubernetes-as-a-Service on top of OpenNebula, offering a structured way to create, access, operate, scale, upgrade, recover, and deprovision Kubernetes Clusters across cloud and edge environments. It combines a user-facing service layer with Cluster API-based infrastructure provisioning through CAPONE, the Cluster API provider for OpenNebula. With OneKS, users work with high-level Kubernetes resources such as K8s Clusters and node groups, while OpenNebula, the Cluster API, CAPONE, and supporting infrastructure resources are orchestrated underneath.
+OpenNebula supports the automated deployment of Kubernetes Clusters through OneKS, the OpenNebula Elastic Kubernetes Service. OneKS provides Kubernetes-as-a-Service on top of OpenNebula, offering a structured way to create, access, operate, scale, upgrade, recover, and deprovision Kubernetes Clusters across cloud and edge environments. It combines a user-facing service layer with Cluster API-based infrastructure provisioning through CAPONE, the Cluster API provider for OpenNebula.
 
 ### Management Model and Tools
 
