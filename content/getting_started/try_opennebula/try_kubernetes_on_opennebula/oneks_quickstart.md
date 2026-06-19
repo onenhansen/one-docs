@@ -5,7 +5,7 @@ date: "2025-02-17"
 description:
 categories: [Learning, Evaluation, Deployment, Introduction]
 pageintoc: "23"
-tags: ['Quick Start', Kubernetes, Tutorial, OneKE]
+tags: ['Quick Start', Kubernetes, Tutorial]
 type: docs
 weight: "7"
 ---
