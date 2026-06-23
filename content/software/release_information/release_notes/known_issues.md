@@ -130,4 +130,4 @@ Until the upstream fix is merged, `sesparse` needs to be recompiled with the pat
 
 ## Ubuntu 22.04
 
-CDROM hot-attach is not supported on Ubuntu 22.04, due to old `virsh` version, requried version is 10.10.0
+CDROM hot-attach is not supported on Ubuntu 22.04, due to old `virsh` version. The requried version is 10.10.0.
