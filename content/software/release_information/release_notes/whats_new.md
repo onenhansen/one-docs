@@ -5,7 +5,7 @@ description:
 categories:
 pageintoc: "244"
 tags:
-weight: "2"
+weight: "1"
 ---
 
 <a id="whats-new"></a>
@@ -16,6 +16,8 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 ## OpenNebula Core
 
 ## Storage & Backups
+
+* Added [interactive backup integration support]({{% relref "../../../product/integration_references/infrastructure_drivers_development/interactive_backup.md#interactive-backup-integration" %}}), enabling third-party backup integrations to pull full and CBT incremental `qcow2` VM backups directly from KVM hypervisors through the OpenNebula Backup Exporter (OneBEX).
 
 ## Networking
 
@@ -30,6 +32,7 @@ The OpenNebula team is excited to announce the availability of the **OpenNebula 
 ## KVM
 
 * Enable filtering by OS ID/type/version/architecture in [QEMU Guest Agent Monitoring](/product/operation_references/hypervisor_configuration/kvm_driver/#qemu-guest-agent-monitoring).
+* Added support for [dummy interfaces]({{% relref "vm_templates#network-interfaces--alias" %}}), allowing KVM VMs to use guest NICs that are not attached to any OpenNebula Virtual Network.
 
 ## LXC
 
@@ -50,3 +53,6 @@ Additionally, the following functionalities are present that were not in OpenNeb
 * [Fix Units in "Size on instantiate" VM Template instantiation](https://github.com/OpenNebula/one/issues/7672).
 * [Fix VM log is not showing up in the FireEdge if USE_VMS_LOCATION=YES](https://github.com/OpenNebula/one/issues/7680).
 * [Fix VM CDROM hot-attach without target or dev-prefix](https://github.com/OpenNebula/one/issues/7736).
+* [Fix API commands executed on HA follower, for full list of commands the GitHub issue](https://github.com/OpenNebula/one/issues/7725).
+* [Fix VirtioFS filesystem image size reporting always `0`](https://github.com/OpenNebula/one/issues/7751).
+* [Fix onehost failing on CLI-only installs due to an unconditional require of HostSyncManager](https://github.com/OpenNebula/one/issues/7768).
