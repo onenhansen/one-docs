@@ -11,6 +11,7 @@ The following new features have been backported to 7.2.2:
 
 * Add Windows OS Profile/Best practices VM template options to `oneswap` Windows conversion [7351](https://github.com/OpenNebula/one/issues/7351).
 * Support for SR-IOV capable network interfaces in [switchdev mode]({{% relref "product/cluster_configuration/hosts_and_clusters/pci_passthrough.md#usage-as-network-interfaces" %}}).
+* Add OneFlow support for deleting scheduled actions from all VMs in a Service or Role through the [`oneflow sched-delete` and `oneflow service sched-delete` commands]({{% relref "product/virtual_machines_operation/multi-vm_workflows/appflow_use_cli.md#deleting-scheduled-actions-from-service-vms" %}}) [#7594](https://github.com/OpenNebula/one/issues/7594).
 
 <!-- item structure
 Include a high level description and a link to the documentation explaining the new feature. Example:
@@ -39,4 +40,3 @@ One line per issue starting with "Fix ...". Descrive the issue so the user under
 
 * Fix failure of `onegroup create` CLI command with empty `--resource` parameter [#7458](https://github.com/OpenNebula/one/issues/7458).
 -->
-
