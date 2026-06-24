@@ -395,7 +395,7 @@ The communication channel with guest agent is enabled in the domain XML when the
 
 You can enable and extend the VM monitoring information gathered by the guest agent by setting `:enabled` to **true** on the file `/var/lib/one/remotes/etc/im/kvm-probes.d/guestagent.conf`. Execute `onehost sync --force` afterwards.
 
-When enabled, the QEMU Guest Agent will by default monitor the internal non-local IP address(es) that are assigned to the VM's NIC.  These values are stored in the `MONITORING/GUEST_IP_ADDRESSES` attribute and will be displayed in the Sunstone interface.
+When enabled, the QEMU Guest Agent will by default monitor the non-loopback IPv4 and IPv6 addresses reported by the guest network interfaces. These values are stored in the `MONITORING/GUEST_IP_ADDRESSES` attribute and will be displayed in the Sunstone interface.
 
 ### Custom QEMU Guest Agent Commands
 
